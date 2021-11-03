@@ -117,8 +117,10 @@ if(!empty($likes)){
                                 '<img class="comment_button action_on_post" src="resources/comment.svg" height="24">' .
                                 '<img class="repost_button action_on_post" src="resources/repost.svg" height="20">' .
                                 '<div class="comments"  id="comment_' . $line["post_id"] . '">
+                                <div class="send_comment_block">
                                 <div contenteditable="true" class="comment_area" placeholder="Оставить комментарий"></div>
                                 <input type="submit" class="send_comment nexus_button"  value="Отправить">
+                                </div>
                                 </div>
                                  </div>';
                         }

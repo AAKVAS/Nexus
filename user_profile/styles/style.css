@@ -167,6 +167,9 @@ body{
     float: left;
     margin-right: 10px;
 }
+.send_comment_block{
+    display: inline-block;
+}
 .comment_area{
     border-radius: 5px;
     word-break: break-all;

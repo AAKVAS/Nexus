@@ -12,7 +12,7 @@ if (!connect()) {
 else {
     $decoded = (array)JWT::decode($_COOKIE["key"], "ArtyomIsLatent", array('HS256'));
     $user_id = $decoded["id"];
-    $content = $_POST["content"];
+    $content = htmlentities($_POST["content"]);
     $post_id = $_POST["post_id"];
 
     if(!empty($user_id)&&!empty($content)&&!empty($post_id)){

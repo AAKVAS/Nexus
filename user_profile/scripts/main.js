@@ -223,7 +223,7 @@ let SendComment = document.getElementsByClassName("send_comment");
 for (let i=0; i<SendComment.length; i++){
     SendComment[i].onclick = function (){
         let comment = SendComment[i].parentNode;
-        let post_id = comment.parentNode.getAttribute("name");
+        let post_id = comment.parentNode.parentElement.getAttribute("name");
         post_id = post_id.match(/(\d+)\s(\d+)/i);
 
         let content = comment.firstElementChild.innerHTML;
