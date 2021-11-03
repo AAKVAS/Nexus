@@ -65,10 +65,17 @@ for (let i=0; i<CommentButtons.length; i++){
             data: {post_id: id[2]},
             success: function(data){
                 data = JSON.parse(data);
-                let content = data[data.length-1].content;
-                if(CommentButtons[i].parentNode.lastElementChild.lastElementChild.textContent !== content){
+                let lastComment = data[data.length-1];
+                let lastComName = CommentButtons[i].parentElement.lastElementChild.lastElementChild.lastElementChild.getAttribute("name");
+                if(lastComName===null){
+                    lastComName = "comment_id_0";
+                }
+                lastComName = lastComName.match(/(\w+)_(\d+)/i);
+                if(lastComName[2] !== lastComment.comment_id){
                     for(let j=1; j<data.length; j++){
-
+                        if(lastComName[2]>data[j].comment_id){
+                            continue;
+                        }
                         let html = '<hr><div class="comment_block" name="comment_id_' + data[j].comment_id + '">' +
                             '<a href="http://localhost:9092/user_profile/index.php?id=' + data[j].user_id +'">' +
                             data[j].firstname + ' ' + data[j].lastname + '</a>' +
@@ -76,25 +83,17 @@ for (let i=0; i<CommentButtons.length; i++){
                             '<div class="comment_points_menu">';
                         if(data[0]==data[j].user_id){
 
-                            html += '<div class="edit_comment_button">Редактировать</div><hr><div class="delete_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Удалить</div><hr>';
+                            html += '<div class="edit_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Редактировать</div><hr><div class="delete_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Удалить</div><hr>';
                         }
                         html +=
-                            '<div>Ответить</div></div><br>' +
-                            data[j].content + '</div>';
+                            '<div>Ответить</div></div><br><div>' +
+                            data[j].content + '</div></div>';
                         let div = document.createElement("DIV");
 
                         div.innerHTML = html;
                         CommentButtons[i].parentNode.lastElementChild.appendChild(div);
 
-                        let EditCommentButton = document.getElementsByClassName("edit_comment_button");
-                        for (let i=0; i<EditCommentButton.length; i++){
-                            EditCommentButton[i].onclick = function (){
-                                let CommentEditor = document.getElementById("modal");
-                                document.getElementById("edit_text").setAttribute("name", data[j].comment_id + " " + data[j].post_id);
-                                document.getElementById("editor").value = data[j].content;
-                                CommentEditor.style.display = "block";
-                            }
-                        }
+
 
                         let Commentpoints = document.getElementsByClassName("comment_points");
                         for (let i=0; i<Commentpoints.length; i++){
@@ -116,6 +115,19 @@ for (let i=0; i<CommentButtons.length; i++){
 
                     }
                 }
+
+                let EditCommentButton = document.getElementsByClassName("edit_comment_button");
+                for (let i=0; i<EditCommentButton.length; i++){
+                    EditCommentButton[i].onclick = function (){
+                        let CommentEditor = document.getElementById("modal");
+                        Id = EditCommentButton[i].getAttribute("name");
+                        document.getElementById("edit_text").setAttribute("name", Id);
+
+                        document.getElementById("editor").value = EditCommentButton[i].parentElement.parentElement.lastElementChild.innerHTML;
+                        CommentEditor.style.display = "block";
+                    }
+                }
+
                 let DeleteCommentButton = document.getElementsByClassName("delete_comment_button");
                 for (let i=0; i<DeleteCommentButton.length; i++){
                     DeleteCommentButton[i].onclick = function(){
@@ -226,7 +238,7 @@ for (let i=0; i<SendComment.length; i++){
         let post_id = comment.parentNode.parentElement.getAttribute("name");
         post_id = post_id.match(/(\d+)\s(\d+)/i);
 
-        let content = comment.firstElementChild.innerHTML;
+        let content = comment.firstElementChild.innerText;
 
         $.ajax({
             url: 'scripts/sendComment.php',
