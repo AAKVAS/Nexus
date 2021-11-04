@@ -86,12 +86,14 @@ for (let i=0; i<CommentButtons.length; i++){
                             html += '<div class="edit_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Редактировать</div><hr><div class="delete_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Удалить</div><hr>';
                         }
                         html +=
-                            '<div>Ответить</div></div><br><div>' +
-                            data[j].content + '</div></div>';
+                            '<div>Ответить</div></div><br><div id="comment_text_'+ data[j].comment_id + '">' +
+                            '</div></div>';
                         let div = document.createElement("DIV");
-
+                        let comment_id = "comment_text_" + data[j].comment_id;
                         div.innerHTML = html;
+
                         CommentButtons[i].parentNode.lastElementChild.appendChild(div);
+                        document.getElementById(comment_id).innerText = data[j].content;
 
 
 
