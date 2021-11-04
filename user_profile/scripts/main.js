@@ -82,11 +82,10 @@ for (let i=0; i<CommentButtons.length; i++){
                             '<img src="resources/points.svg" class="comment_points" height="20">' +
                             '<div class="comment_points_menu">';
                         if(data[0]==data[j].user_id){
-
                             html += '<div class="edit_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Редактировать</div><hr><div class="delete_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Удалить</div><hr>';
                         }
                         html +=
-                            '<div>Ответить</div></div><br><div id="comment_text_'+ data[j].comment_id + '">' +
+                            '<div class="answer_comment">Ответить</div></div><br><div id="comment_text_'+ data[j].comment_id + '">' +
                             '</div></div>';
                         let div = document.createElement("DIV");
                         let comment_id = "comment_text_" + data[j].comment_id;
@@ -130,6 +129,50 @@ for (let i=0; i<CommentButtons.length; i++){
                     }
                 }
 
+                let AnswerComment = $(".answer_comment");
+                for(let i=0; i<AnswerComment.length; i++){
+                    let buttonCounter = 0;
+                    AnswerComment[i].onclick = function (){
+                        html =
+                            '<div class="send_comment_block">'+
+                            '<div contentEditable="true" class="comment_area" ></div>' +
+                            '<input type="submit" class="send_answer_comment nexus_button" value="Отправить">'+
+                            '</div>';
+                        let div = document.createElement("DIV");
+                        div.innerHTML = html;
+                        AnswerComment[i].parentElement.parentNode.appendChild(div);
+
+                        let SendAnswerComment = document.getElementsByClassName("send_answer_comment");
+                        //for (let i=0; i<SendAnswerComment.length; i++){
+                            SendAnswerComment[buttonCounter].onclick = function (){
+
+                                let commentBlock = SendAnswerComment[buttonCounter].parentNode;
+                                let post_id = commentBlock.parentNode.parentElement.getAttribute("name");
+                                post_id = post_id.match(/(\w+)_(\d+)/i);
+                                buttonCounter++;
+                                let content = commentBlock.firstElementChild.innerText;
+                                alert(content);
+
+                                /*$.ajax({
+                                    url: 'scripts/sendAnswerComment.php',
+                                    method: 'post',
+                                    dataType: 'html',
+                                    data: {content: content, post_id: post_id[1]},
+                                    success: function(data){
+
+                                    }
+                                });*/
+
+                           //    }
+                        }
+
+                    }
+
+                }
+
+
+
+
                 let DeleteCommentButton = document.getElementsByClassName("delete_comment_button");
                 for (let i=0; i<DeleteCommentButton.length; i++){
                     DeleteCommentButton[i].onclick = function(){
@@ -147,6 +190,8 @@ for (let i=0; i<CommentButtons.length; i++){
                         });
                     }
                 }
+
+
 
             }
         });

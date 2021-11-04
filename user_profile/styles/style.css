@@ -197,6 +197,14 @@ body{
     display: block;
     float: left;
 }
+.send_answer_comment{
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    margin-right: 47px;
+    display: block;
+    float: left;
+}
 .share_comment{
     margin-top: 0px;
     margin-left: 10px;
