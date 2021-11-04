@@ -125,7 +125,7 @@ for (let i=0; i<CommentButtons.length; i++){
                         Id = EditCommentButton[i].getAttribute("name");
                         document.getElementById("edit_text").setAttribute("name", Id);
 
-                        document.getElementById("editor").value = EditCommentButton[i].parentElement.parentElement.lastElementChild.innerHTML;
+                        document.getElementById("editor").value = EditCommentButton[i].parentElement.parentElement.lastElementChild.innerText;
                         CommentEditor.style.display = "block";
                     }
                 }
