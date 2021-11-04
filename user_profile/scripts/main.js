@@ -133,6 +133,7 @@ for (let i=0; i<CommentButtons.length; i++){
                 for(let i=0; i<AnswerComment.length; i++){
                     let buttonCounter = 0;
                     AnswerComment[i].onclick = function (){
+
                         html =
                             '<div class="send_comment_block">'+
                             '<div contentEditable="true" class="comment_area" ></div>' +
@@ -141,7 +142,7 @@ for (let i=0; i<CommentButtons.length; i++){
                         let div = document.createElement("DIV");
                         div.innerHTML = html;
                         AnswerComment[i].parentElement.parentNode.appendChild(div);
-
+                        AnswerComment[i].parentElement.style.display = "none";
                         let SendAnswerComment = document.getElementsByClassName("send_answer_comment");
                         //for (let i=0; i<SendAnswerComment.length; i++){
                             SendAnswerComment[buttonCounter].onclick = function (){
