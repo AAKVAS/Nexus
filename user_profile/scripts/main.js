@@ -131,9 +131,11 @@ for (let i=0; i<CommentButtons.length; i++){
 
                 let AnswerComment = $(".answer_comment");
                 for(let i=0; i<AnswerComment.length; i++){
-                    let buttonCounter = 0;
                     AnswerComment[i].onclick = function (){
-
+                        if(AnswerComment[i].parentElement.parentElement.getElementsByClassName("send_comment_block").length>0){
+                            //сделай ответить невидимым
+                            return;
+                        }
                         html =
                             '<div class="send_comment_block">'+
                             '<div contentEditable="true" class="comment_area" ></div>' +
@@ -144,28 +146,31 @@ for (let i=0; i<CommentButtons.length; i++){
                         AnswerComment[i].parentElement.parentNode.appendChild(div);
                         AnswerComment[i].parentElement.style.display = "none";
                         let SendAnswerComment = document.getElementsByClassName("send_answer_comment");
-                        //for (let i=0; i<SendAnswerComment.length; i++){
-                            SendAnswerComment[buttonCounter].onclick = function (){
+                            for(let j=0; j<SendAnswerComment.length; j++){
+                                SendAnswerComment[j].onclick = function (){
 
-                                let commentBlock = SendAnswerComment[buttonCounter].parentNode;
-                                let post_id = commentBlock.parentNode.parentElement.getAttribute("name");
-                                post_id = post_id.match(/(\w+)_(\d+)/i);
-                                buttonCounter++;
-                                let content = commentBlock.firstElementChild.innerText;
-                                alert(content);
+                                    let commentBlock = SendAnswerComment[j].parentElement;
+                                    let comment_id = commentBlock.parentNode.parentElement.getAttribute("name");
+                                    comment_id = comment_id.match(/(\w+)_(\d+)/i);
 
-                                /*$.ajax({
-                                    url: 'scripts/sendAnswerComment.php',
-                                    method: 'post',
-                                    dataType: 'html',
-                                    data: {content: content, post_id: post_id[1]},
-                                    success: function(data){
+                                    let content = commentBlock.firstElementChild.innerText;
+                                    let post_id = commentBlock.closest(".profile_wall").getAttribute("name");
+                                    post_id = post_id.match(/(\d+)\s(\d+)/i);
 
-                                    }
-                                });*/
+                                    $.ajax({
+                                        url: 'scripts/sendAnswerComment.php',
+                                        method: 'post',
+                                        dataType: 'html',
+                                        data: {content: content, comment_id: comment_id[2], post_id: post_id[2]},
+                                        success: function(data){
+                                            alert(data);
+                                        }
+                                    });
 
-                           //    }
-                        }
+
+                                }
+                            }
+
 
                     }
 

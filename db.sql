@@ -66,4 +66,18 @@ create table post_likes
 alter table post_likes
     owner to postgres;
 
+create table replies_to_comments
+(
+    comment_id       integer not null
+        constraint replies_to_comments_comments_comment_id_fk
+            references comments
+            on update cascade on delete cascade,
+    answered_comment integer not null
+        constraint replies_to_comments_comments_comment_id_fk_2
+            references comments
+            on update cascade on delete cascade
+);
+
+alter table replies_to_comments
+    owner to postgres;
 
