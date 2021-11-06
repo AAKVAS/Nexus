@@ -178,9 +178,10 @@ body{
     place-content: center;
     height: auto;
     min-height: 30px;
-    width: 600px;
+    width:500px;
     float: left;
     margin-top: 4px;
+    margin-right: 10px;
 }
 
 .comments{
@@ -191,15 +192,13 @@ body{
 }
 .send_comment{
     margin-top: 3px;
-    margin-left: 10px;
     margin-bottom: 20px;
     margin-right: 47px;
     display: block;
-    float: left;
+
 }
 .send_answer_comment{
     margin-top: 3px;
-    margin-left: 10px;
     margin-bottom: 20px;
     margin-right: 47px;
     display: block;
@@ -215,6 +214,12 @@ body{
     display: block;
     height: auto;
     word-break: break-word;
+}
+.replies_comment{
+    padding-left: 20px;
+}
+.answer_line{
+    margin-left: 20px;
 }
 a{
     text-decoration: none;

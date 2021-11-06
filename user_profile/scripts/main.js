@@ -76,7 +76,20 @@ for (let i=0; i<CommentButtons.length; i++){
                         if(lastComName[2]>data[j].comment_id){
                             continue;
                         }
-                        let html = '<hr><div class="comment_block" name="comment_id_' + data[j].comment_id + '">' +
+                        //alert(data[j].replies_comment);
+                        let parentCommentBlock = CommentButtons[i].parentNode.lastElementChild;
+                        if(data[j].replies_comment!==null) {
+                            parentCommentBlock = document.getElementById("comment_text_" + data[j].replies_comment).parentElement;
+                        }
+
+                        let html;
+                        if(data[j].replies_comment!==null) {
+                            html = '<hr class="answer_line"><div class="comment_block replies_comment" name="comment_id_' + data[j].comment_id + '">';
+                        }
+                        else{
+                            html = '<hr><div class="comment_block" name="comment_id_' + data[j].comment_id + '">';
+                        }
+                         html +=
                             '<a href="http://localhost:9092/user_profile/index.php?id=' + data[j].user_id +'">' +
                             data[j].firstname + ' ' + data[j].lastname + '</a>' +
                             '<img src="resources/points.svg" class="comment_points" height="20">' +
@@ -91,7 +104,7 @@ for (let i=0; i<CommentButtons.length; i++){
                         let comment_id = "comment_text_" + data[j].comment_id;
                         div.innerHTML = html;
 
-                        CommentButtons[i].parentNode.lastElementChild.appendChild(div);
+                        parentCommentBlock.appendChild(div);
                         document.getElementById(comment_id).innerText = data[j].content;
 
 
@@ -138,12 +151,12 @@ for (let i=0; i<CommentButtons.length; i++){
                         }
                         html =
                             '<div class="send_comment_block">'+
-                            '<div contentEditable="true" class="comment_area" ></div>' +
+                            '<div contentEditable="true" class="comment_area"></div>' +
                             '<input type="submit" class="send_answer_comment nexus_button" value="Отправить">'+
                             '</div>';
                         let div = document.createElement("DIV");
                         div.innerHTML = html;
-                        AnswerComment[i].parentElement.parentNode.appendChild(div);
+                        AnswerComment[i].closest(".comment_block").appendChild(div);
                         AnswerComment[i].parentElement.style.display = "none";
                         let SendAnswerComment = document.getElementsByClassName("send_answer_comment");
                             for(let j=0; j<SendAnswerComment.length; j++){
