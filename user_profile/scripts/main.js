@@ -50,6 +50,8 @@ for(let i=0; i<LikeButtons.length; i++){
     }
 }
 
+let arrayOfCommentsId = [];
+
 let CommentButtons = document.getElementsByClassName("comment_button");
 for (let i=0; i<CommentButtons.length; i++){
     CommentButtons[i].onclick = function (){
@@ -65,18 +67,23 @@ for (let i=0; i<CommentButtons.length; i++){
             data: {post_id: id[2]},
             success: function(data){
                 data = JSON.parse(data);
-                let lastComment = data[data.length-1];
-                let lastComName = CommentButtons[i].parentElement.lastElementChild.lastElementChild.lastElementChild.getAttribute("name");
-                if(lastComName===null){
-                    lastComName = "comment_id_0";
-                }
-                lastComName = lastComName.match(/(\w+)_(\d+)/i);
-                if(lastComName[2] !== lastComment.comment_id){
+
                     for(let j=1; j<data.length; j++){
-                        if(lastComName[2]>data[j].comment_id){
+                        let con = false;
+                        for(let k=0; k<arrayOfCommentsId.length; k++){
+                            if(Number(arrayOfCommentsId[k])===Number(data[j].comment_id)){
+                                con = true;
+                                break;
+                            }
+
+                        }
+                        if (con){
+
                             continue;
                         }
-                        //alert(data[j].replies_comment);
+                        arrayOfCommentsId.push(data[j].comment_id);
+
+
                         let parentCommentBlock = CommentButtons[i].parentNode.lastElementChild;
                         if(data[j].replies_comment!==null) {
                             parentCommentBlock = document.getElementById("comment_text_" + data[j].replies_comment).parentElement;
@@ -128,6 +135,14 @@ for (let i=0; i<CommentButtons.length; i++){
 
 
                     }
+                
+
+                let CommentPointsMenu = document.getElementsByClassName("comment_points_menu");
+                for (let i=0; i< CommentPointsMenu.length; i++){
+                    CommentPointsMenu[i].onclick  = function (){
+                        CommentPointsMenu[i].style.display = "none";
+                    }
+
                 }
 
                 let EditCommentButton = document.getElementsByClassName("edit_comment_button");
@@ -146,7 +161,6 @@ for (let i=0; i<CommentButtons.length; i++){
                 for(let i=0; i<AnswerComment.length; i++){
                     AnswerComment[i].onclick = function (){
                         if(AnswerComment[i].parentElement.parentElement.getElementsByClassName("send_comment_block").length>0){
-                            //сделай ответить невидимым
                             return;
                         }
                         html =
@@ -243,6 +257,13 @@ for (let i=0; i<PostPoints.length; i++) {
             PostPoints[i].nextElementSibling.style.display = "block";
         }
 
+    }
+}
+
+let PointsMenu = document.getElementsByClassName("points_menu");
+for (let i=0; i<PointsMenu.length; i++){
+    PointsMenu[i].onclick = function (){
+        PointsMenu[i].style.display = "none";
     }
 }
 
