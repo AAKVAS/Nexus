@@ -14,15 +14,16 @@ alter table users
 
 create table posts
 (
-    post_id serial
+    post_id   serial
         constraint posts_pkey
             primary key,
-    user_id integer
+    user_id   integer
         constraint posts_users_user_id_fk
             references users
             on update cascade on delete cascade,
-    likes   integer,
-    content text not null
+    likes     integer,
+    content   text,
+    send_time integer
 );
 
 alter table posts
@@ -79,5 +80,20 @@ create table replies_to_comments
 );
 
 alter table replies_to_comments
+    owner to postgres;
+
+create table repost
+(
+    post_id integer not null
+        constraint repost_posts_post_id_fk
+            references posts
+            on update cascade on delete cascade,
+    repost  integer not null
+        constraint repost_posts_post_id_fk_2
+            references posts
+            on update cascade on delete cascade
+);
+
+alter table repost
     owner to postgres;
 

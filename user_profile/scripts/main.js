@@ -366,5 +366,21 @@ for (let i=0; i<DeletePostButton.length; i++){
     }
 }
 
+let repostButton = document.getElementsByClassName("repost_button");
+for (let i=0; i<repostButton.length; i++){
+    repostButton[i].onclick = function () {
+        let post_id = repostButton[i].closest(".profile_wall").getAttribute("name").match(/(\d+)\s(\d+)/i);
+        $.ajax({
+            url: 'scripts/repost.php',
+            method: 'post',
+            dataType: 'html',
+            data: {post_id: post_id[2]},
+            success: function (data){
+                alert(data);
+            }
+        });
+    }
+}
+
 
 
