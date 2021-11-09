@@ -170,14 +170,20 @@ for (let i=0; i<CommentButtons.length; i++){
                             '</div>';
                         let div = document.createElement("DIV");
                         div.innerHTML = html;
-                        AnswerComment[i].closest(".comment_block").appendChild(div);
-                        AnswerComment[i].parentElement.style.display = "none";
+
+                        let CommentBlock = AnswerComment[i].closest(".comment_block");
+                        let commentId = CommentBlock.getAttribute("name").match(/(\w+)_(\d+)/i);
+                        document.getElementById("comment_text_" + commentId[2]).appendChild(div);
+
+
+
                         let SendAnswerComment = document.getElementsByClassName("send_answer_comment");
                             for(let j=0; j<SendAnswerComment.length; j++){
                                 SendAnswerComment[j].onclick = function (){
 
                                     let commentBlock = SendAnswerComment[j].parentElement;
-                                    let comment_id = commentBlock.parentNode.parentElement.getAttribute("name");
+
+                                    let comment_id = commentBlock.parentNode.parentElement.id;
                                     comment_id = comment_id.match(/(\w+)_(\d+)/i);
 
                                     let content = commentBlock.firstElementChild.innerText;
@@ -190,7 +196,7 @@ for (let i=0; i<CommentButtons.length; i++){
                                         dataType: 'html',
                                         data: {content: content, comment_id: comment_id[2], post_id: post_id[2]},
                                         success: function(data){
-                                            alert(data);
+
                                         }
                                     });
 
