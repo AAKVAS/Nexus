@@ -105,7 +105,7 @@ for (let i=0; i<CommentButtons.length; i++){
                             html += '<div class="edit_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Редактировать</div><hr><div class="delete_comment_button" name="' + data[j].comment_id + " " + id[2] +'">Удалить</div><hr>';
                         }
                         html +=
-                            '<div class="answer_comment">Ответить</div></div><br><div id="comment_text_'+ data[j].comment_id + '">' +
+                            '<div class="answer_comment">Ответить</div></div><br><div id="comment_text_'+ data[j].comment_id + '" class="comment_content">' +
                             '</div></div>';
                         let div = document.createElement("DIV");
                         let comment_id = "comment_text_" + data[j].comment_id;
@@ -160,7 +160,10 @@ for (let i=0; i<CommentButtons.length; i++){
                 let AnswerComment = $(".answer_comment");
                 for(let i=0; i<AnswerComment.length; i++){
                     AnswerComment[i].onclick = function (){
-                        if(AnswerComment[i].parentElement.parentElement.getElementsByClassName("send_comment_block").length>0){
+                        /*if(AnswerComment[i].parentElement.parentElement.getElementsByClassName("send_comment_block").length>0){
+                            return;
+                        }*/
+                        if(AnswerComment[i].parentElement.parentElement.getElementsByClassName("comment_content")[0].getElementsByClassName("send_comment_block").length>0){
                             return;
                         }
                         html =
