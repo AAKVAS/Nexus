@@ -90,12 +90,31 @@ if(!empty($likes)){
                     <?php
 
                         while ($line = pg_fetch_array($getpost, null, PGSQL_ASSOC)){
+                            $post_id = $line["post_id"];
+                            $user_id = null;
+                            $name = null;
+                            $likes = null;
+                            if($line["repost"]!=null){
+
+                                $user_id = $line["user_id"];
+                                $name = $line["firstname"] . " " .$line["lastname"];
+                                $likes = $line["likes"];
+                            }
                             while($line["repost"]!=null)
                             {
                                $line=pg_fetch_array(pg_query("select posts.post_id, posts.user_id, posts.likes, posts.content, posts.send_time, repost.repost, users.firstname, users.lastname from  users, posts LEFT JOIN repost on posts.post_id = repost.post_id WHERE posts.post_id='" . $line["repost"] . "' ORDER BY post_id DESC;"));
+
                             }
 
-                            echo '<div name="' . $id . " " . $line["post_id"] .'" class="profile_wall"><div class="post_content"><a href="http://localhost:9092/user_profile/index.php?id="' . $line["user_id"] . '">' . $line["firstname"] . ' ' . $line["firstname"] .
+                            echo '<div name="' . $id . " " . $post_id .'" class="profile_wall">';
+                            if(!empty($user_id)){
+                                echo '<div name="' . $id . " " . $line["post_id"] .'" class="repost_block"><a href="http://localhost:9092/user_profile/index.php?id="' . $user_id . '">' . $name . '</div>';
+                                echo '<div class="post_content moved_right">';
+                            }
+                            else{
+                                echo '<div class="post_content">';
+                            }
+                            echo '<a href="http://localhost:9092/user_profile/index.php?id="' . $line["user_id"] . '">' . $line["firstname"] . ' ' . $line["lastname"] .
                                 '</a>';
                             if($id==$tokenId){
                                 echo '<img src="resources/points.svg" class="post_points" height="20">'.
@@ -105,13 +124,13 @@ if(!empty($likes)){
                             }
                             echo  "<br><div>" . htmlentities($line["content"]) . "</div></div><br>";
 
-                            if(!empty($line["likes"])){
-                                echo '<div class="like" id="like_' . $line["post_id"] . '">' . $line["likes"] . '</div>';
+                            if(!empty($likes)){
+                                echo '<div class="like" id="like_' . $post_id . '">' . $likes . '</div>';
                             }
                             else{
-                                echo '<div class="like" id="like_' . $line["post_id"] . '"></div>';
+                                echo '<div class="like" id="like_' . $post_id . '"></div>';
                             }
-                            if(array_key_exists($line["post_id"], $liked_posts)){
+                            if(array_key_exists($post_id, $liked_posts)){
                                 echo '<img class="like_button action_on_post" src="resources/like.svg" height="20" >';
 
                             }
@@ -121,7 +140,7 @@ if(!empty($likes)){
                             echo
                                 '<img class="comment_button action_on_post" src="resources/comment.svg" height="24">' .
                                 '<img class="repost_button action_on_post" src="resources/repost.svg" height="20">' .
-                                '<div class="comments"  id="comment_' . $line["post_id"] . '">
+                                '<div class="comments"  id="comment_' . $post_id . '">
                                 <div class="send_comment_block">
                                 <div contenteditable="true" class="comment_area" placeholder="Оставить комментарий"></div>
                                 <input type="submit" class="send_comment nexus_button"  value="Отправить">
