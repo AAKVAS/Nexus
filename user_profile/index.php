@@ -25,7 +25,7 @@ if(empty($query)){
     exit;
 }
 
-$getpost = pg_query("SELECT content, post_id, posts.user_id, likes, firstname, lastname from posts, users where posts.user_id=users.user_id and posts.user_id ='" . $query->user_id . "' ORDER BY post_id DESC;");
+$getpost = pg_query("select posts.post_id, posts.user_id, posts.likes, posts.content, posts.send_time, repost.repost, users.firstname, users.lastname from  users, posts LEFT JOIN repost on posts.post_id = repost.post_id WHERE posts.user_id=users.user_id AND posts.user_id='" . $query->user_id . "' ORDER BY post_id DESC;");
 $likes = pg_query("SELECT * FROM post_likes WHERE user_id ='" . $tokenId . "' AND owner_user='" .  $query->user_id . "' ORDER BY post_id DESC;");
 $liked_posts = array();
 if(!empty($likes)){
@@ -90,6 +90,11 @@ if(!empty($likes)){
                     <?php
 
                         while ($line = pg_fetch_array($getpost, null, PGSQL_ASSOC)){
+                            while($line["repost"]!=null)
+                            {
+                               $line=pg_fetch_array(pg_query("select posts.post_id, posts.user_id, posts.likes, posts.content, posts.send_time, repost.repost, users.firstname, users.lastname from  users, posts LEFT JOIN repost on posts.post_id = repost.post_id WHERE posts.post_id='" . $line["repost"] . "' ORDER BY post_id DESC;"));
+                            }
+
                             echo '<div name="' . $id . " " . $line["post_id"] .'" class="profile_wall"><div class="post_content"><a href="http://localhost:9092/user_profile/index.php?id="' . $line["user_id"] . '">' . $line["firstname"] . ' ' . $line["firstname"] .
                                 '</a>';
                             if($id==$tokenId){
