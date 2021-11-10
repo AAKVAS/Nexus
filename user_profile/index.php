@@ -99,6 +99,7 @@ if(!empty($likes)){
                                 $user_id = $line["user_id"];
                                 $name = $line["firstname"] . " " .$line["lastname"];
                                 $likes = $line["likes"];
+                                $content = $line["content"];
                             }
                             while($line["repost"]!=null)
                             {
@@ -108,15 +109,24 @@ if(!empty($likes)){
 
                             echo '<div name="' . $id . " " . $post_id .'" class="profile_wall">';
                             if(!empty($user_id)){
-                                echo '<div name="' . $id . " " . $line["post_id"] .'" class="repost_block"><a href="http://localhost:9092/user_profile/index.php?id="' . $user_id . '">' . $name . '</div>';
+                                echo '<div name="' . $id . " " . $line["post_id"] .'" class="repost_block"><a href="http://localhost:9092/user_profile/index.php?id="' . $user_id . '">' . $name . '</a>';
+                                if($id==$tokenId){
+                                    echo '<img src="resources/points.svg" class="post_points" height="20">'.
+                                        '<div class="points_menu">'.
+                                        '<div class="post_edit_button">Редактировать</div><hr>'.
+                                        '<div class="delete_post_button">Удалить</div></div>
+                                        </div>';
+                                }
+                                echo  "<div>" . htmlentities($content) . "</div><br>";
                                 echo '<div class="post_content moved_right">';
+
                             }
                             else{
                                 echo '<div class="post_content">';
                             }
                             echo '<a href="http://localhost:9092/user_profile/index.php?id="' . $line["user_id"] . '">' . $line["firstname"] . ' ' . $line["lastname"] .
                                 '</a>';
-                            if($id==$tokenId){
+                            if($id==$tokenId && empty($user_id)){
                                 echo '<img src="resources/points.svg" class="post_points" height="20">'.
                                     '<div class="points_menu">'.
                                     '<div class="post_edit_button">Редактировать</div><hr>'.

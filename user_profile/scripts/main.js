@@ -281,11 +281,17 @@ for (let i=0; i<PostEditButton.length; i++){
     PostEditButton[i].onclick = function (){
 
         let PostEditor = document.getElementById("modal");
-        let idValue = PostEditButton[i].parentElement.parentElement.parentElement.getAttribute("name");
+        let idValue = PostEditButton[i].closest(".profile_wall").getAttribute("name");
         let id  = idValue.match(/(\d+)\s(\d+)/i);
-
+        let content
+        if(PostEditButton[i].parentElement.parentElement.lastElementChild.className==="points_menu"){
+             content = "";
+        }
+        else{
+            content = PostEditButton[i].parentElement.parentElement.lastElementChild.innerHTML;
+        }
         document.getElementById("edit_text").setAttribute("name", id[2]);
-        document.getElementById("editor").value = PostEditButton[i].parentElement.parentElement.lastElementChild.innerHTML;
+        document.getElementById("editor").value = content;
         PostEditor.style.display = "block";
 
     }
@@ -376,7 +382,7 @@ for (let i=0; i<repostButton.length; i++){
             dataType: 'html',
             data: {post_id: post_id[2]},
             success: function (data){
-                alert(data);
+
             }
         });
     }
