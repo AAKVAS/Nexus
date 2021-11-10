@@ -103,7 +103,7 @@ if(!empty($likes)){
                             }
                             while($line["repost"]!=null)
                             {
-                               $line=pg_fetch_array(pg_query("select posts.post_id, posts.user_id, posts.likes, posts.content, posts.send_time, repost.repost, users.firstname, users.lastname from  users, posts LEFT JOIN repost on posts.post_id = repost.post_id WHERE posts.post_id='" . $line["repost"] . "' ORDER BY post_id DESC;"));
+                               $line=pg_fetch_array(pg_query("select posts.post_id, posts.user_id, posts.likes, posts.content, posts.send_time, repost.repost, users.firstname, users.lastname from  users, posts LEFT JOIN repost on posts.post_id = repost.post_id WHERE posts.user_id=users.user_id AND posts.post_id='" . $line["repost"] . "' ORDER BY post_id DESC;"));
 
                             }
 
