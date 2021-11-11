@@ -1,0 +1,64 @@
+body{
+    background-color: #eeeeee;
+    font-family: 'Montserrat', "sans-serif";
+    font-weight: bolder;
+}
+div{
+    border-radius: 5px;
+}
+.page_header{
+    background-color: white;
+    padding: 5px;
+    color: whitesmoke;
+    text-align: right;
+    font-size: 20px;
+}
+.logo{
+    height: 50px;
+    margin-right: 10px;
+}
+.page_body{
+    background-color: #fefefe;
+    height: auto;
+    float: left;
+    width: 1000px;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+.row{
+    color: darkgrey;
+    width: 230px;
+    display: block;
+    padding: 10px;
+    background-color: #ddd;
+    float: left;
+    margin: 10px;
+    height: 500px;
+}
+.narrow_column{
+    width: 990px;
+}
+.user_login{
+    height: 160px;
+    padding: 10px;
+    background-color: #dddddd;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.user_name_wrap{
+    float: left;
+}
+.pencil_button{
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 7px;
+}
+.prompt{
+    color: #5f5f5f;
+    float: left;
+    font-size:25px;
+    margin-right: 10px;
+}

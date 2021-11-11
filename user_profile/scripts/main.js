@@ -388,5 +388,9 @@ for (let i=0; i<repostButton.length; i++){
     }
 }
 
+let editProfileButton = document.getElementById("edit_profile");
+editProfileButton.onclick = function() {
+    window.location.replace("../../edit_profile_page/index.php");
+}
 
 

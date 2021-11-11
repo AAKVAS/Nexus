@@ -24,7 +24,7 @@ body{
     display: block;
     padding: 10px;
     background-color: #ddd;
-    float: right;
+    float: left;
     margin: 10px;
     height: 500px;
 }
