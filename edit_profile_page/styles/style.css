@@ -3,8 +3,11 @@ body{
     font-family: 'Montserrat', "sans-serif";
     font-weight: bolder;
 }
-div{
+.nexus_button{
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
     border-radius: 5px;
+    color: white;
+    padding: 5px;
 }
 .page_header{
     background-color: white;
@@ -13,6 +16,24 @@ div{
     text-align: right;
     font-size: 20px;
 }
+.comment_area{
+    border-radius: 5px;
+    word-break: break-all;
+    border: #000 1px solid;
+    background-color: white;
+    place-content: center;
+    height: auto;
+    min-height: 30px;
+    font-size:20px;
+    width:300px;
+    float: left;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+div{
+    border-radius: 5px;
+}
+
 .logo{
     height: 50px;
     margin-right: 10px;
@@ -40,19 +61,25 @@ div{
     width: 990px;
 }
 .user_login{
-    height: 160px;
+    margin-top: 5px;
+    min-height: 200px;
+    height: content-box;
     padding: 10px;
     background-color: #dddddd;
     font-size: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
-.user_name_wrap{
+.user_login_wrap{
+    height: auto;
+    display: inline-block;
+}
+.user_data_wrap{
     float: left;
 }
 .pencil_button{
     height: 20px;
     width: 20px;
-    float: left;
+
     margin-left: 10px;
     margin-top: 7px;
 }

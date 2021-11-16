@@ -35,15 +35,26 @@ if(empty($user)){
     <div class="page_body">
             <div class="narrow_column">
                     <div class="user_login">
-                        <div class="user_name_wrap">
-                            <div class="username" id="firstname"><div class="prompt">Firstname:</div> <?= $user->firstname ?></div>
+                        <div class="user_login_wrap">
+                            <div class="user_data_wrap">
+                                <div class="userdata" id="firstname"><div class="prompt">Firstname:</div> <?= $user->firstname ?></div>
+                            </div>
+                            <img class="pencil_button" id="edit_name" src="../resources/pencil.svg">
                         </div>
-                        <img class="pencil_button" id="edit_name" src="../resources/pencil.svg">
                         <br>
-                        <div class="user_name_wrap">
-                            <div class="username" id="lastname"><div class="prompt">Lastname:</div><?= $user->lastname?></div>
+                        <div class="user_login_wrap">
+                            <div class="user_data_wrap">
+                                <div class="userdata" id="lastname"><div class="prompt">Lastname:</div><?= $user->lastname?></div>
+                            </div>
+                            <img class="pencil_button" id="edit_lastname" src="../resources/pencil.svg">
                         </div>
-                        <img class="pencil_button" id="edit_name" src="../resources/pencil.svg">
+                        <br>
+                        <div class="user_login_wrap">
+                            <div class="user_data_wrap">
+                                <div class="userdata" id="email"><div class="prompt">Email:</div><?= $user->email?></div>
+                            </div>
+                            <img class="pencil_button" id="edit_email" src="../resources/pencil.svg">
+                        </div>
                     </div>
             </div>
     </div>
@@ -51,5 +62,6 @@ if(empty($user)){
         <div class="sidebar">сайдбар</div>
     </div>
 </div>
+<script src="scripts/main.js"></script>
 </body>
 </html>
