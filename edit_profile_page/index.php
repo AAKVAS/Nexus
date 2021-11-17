@@ -55,6 +55,13 @@ if(empty($user)){
                             </div>
                             <img class="pencil_button" id="edit_email" src="../resources/pencil.svg">
                         </div>
+                        <br>
+                        <div class="user_login_wrap">
+                            <div class="user_data_wrap">
+                                <div class="userdata" id="password"><div class="prompt">Password</div></div>
+                            </div>
+                            <img class="pencil_button" id="edit_password" src="../resources/pencil.svg">
+                        </div>
                     </div>
             </div>
     </div>
@@ -62,6 +69,16 @@ if(empty($user)){
         <div class="sidebar">сайдбар</div>
     </div>
 </div>
+<div id="modal">
+    <div id="confirm_password">
+        Confirm the password:
+        <img src="../resources/cross.svg" id="cross_img">
+        <textarea id="editor"></textarea>
+        <input type="submit" class="nexus_button" id="submit_password" value="Confirm">
+
+    </div>
+</div>
+<script src="../jquery-latest.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>

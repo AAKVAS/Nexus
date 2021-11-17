@@ -176,7 +176,7 @@ if(!empty($likes)){
     </div>
 </div>
 
-<script src="scripts/jquery-latest.js"></script>
+<script src="../jquery-latest.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>
