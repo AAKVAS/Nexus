@@ -27,6 +27,11 @@ else{
         case 'edit_password':
             $field = 'password';
     }
-    pg_query("UPDATE users SET " . $field . "='" . $newValue ."' WHERE user_id='" . $user_id ."';");
+    if(!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i", $newValue) && $buttonType=='edit_email'){
+        echo "data_is_incorrect";
+    }
+    else{
+        pg_query("UPDATE users SET " . $field . "='" . $newValue ."' WHERE user_id='" . $user_id ."';");
+    }
 }
 

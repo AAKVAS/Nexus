@@ -46,6 +46,9 @@ for (let i=0; i< pencilButtons.length; i++){
                                     dataType: 'html',
                                     data: {newValue: newValue, buttonType: buttonType},
                                     success: function(data){
+                                        if(data==="data_is_incorrect"){
+                                            alert("E-mail entered incorrectly");
+                                        }
                                     }
                                 });
                             };
