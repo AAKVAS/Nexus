@@ -34,7 +34,7 @@ if(!empty($likes)){
     }
 }
 
-
+$isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE user_id='" . $id ."' AND subscriber='" . $tokenId ."';"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +45,8 @@ if(!empty($likes)){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet"></head>
-<body>
-<header id="page_header" class=""><img class="logo" src="../resources/Nexus_1_3.png" ></header>
+<body id="<?= $id ?>">
+<header id="page_header"><img class="logo" src="../resources/Nexus_1_3.png" ></header>
 <div class="page_layout">
     <div class="page_body">
         <div class="narrow_column">
@@ -59,7 +59,19 @@ if(!empty($likes)){
                     }
                     else{
                         echo '<input id="send_message" class="nexus_button" type="submit" value="Сообщения"><br>';
-                        echo '<input id="become_friends" class="nexus_button" type="submit" value="Добавить в друзья">';
+                        if(!empty($isSubscriber->user_id)){
+                            echo '<input id="become_friends" class="nexus_button" type="submit" value="Отменить заявку">';
+                        }
+                        else{
+                            $isFriend =  pg_fetch_object(pg_query("SELECT * FROM friend WHERE (user_id='" . $id ."' AND friend_id='" . $tokenId ."') OR (user_id='" . $tokenId . "' AND friend_id='" . $id ."')"));
+                            if(!empty($isFriend->user_id)){
+                                echo '<input id="become_friends" class="nexus_button" type="submit" value="Удалить из друзей">';
+                            }
+                            else{
+                                echo '<input id="become_friends" class="nexus_button" type="submit" value="Добавить в друзья">';
+                            }
+                       }
+
                     }
                 ?>
 

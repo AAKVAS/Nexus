@@ -388,9 +388,34 @@ for (let i=0; i<repostButton.length; i++){
     }
 }
 
-let editProfileButton = document.getElementById("edit_profile");
-editProfileButton.onclick = function() {
-    window.location.replace("../../edit_profile_page/index.php");
+try{
+    let becomeFriends = document.getElementById("become_friends");
+    becomeFriends.onclick = function (){
+        $.ajax({
+            url: 'scripts/becomeFriends.php',
+            method: 'post',
+            dataType: 'html',
+            data: {id: document.getElementsByTagName("body")[0].id},
+            success: function (data){
+
+            }
+        });
+    }
 }
+catch (TypeError){
+
+}
+
+
+try{
+    let editProfileButton = document.getElementById("edit_profile");
+    editProfileButton.onclick = function() {
+        window.location.replace("../../edit_profile_page/index.php");
+    }
+}
+catch (TypeError){
+
+}
+
 
 

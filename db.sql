@@ -97,3 +97,33 @@ create table repost
 alter table repost
     owner to postgres;
 
+create table friend
+(
+    user_id   integer not null
+        constraint friend_users_friend_id_user_id_fk
+            references users
+            on update cascade on delete cascade,
+    friend_id integer not null
+        constraint friend_users_user_id_fk
+            references users
+            on update cascade on delete cascade
+);
+
+alter table friend
+    owner to postgres;
+
+create table subscriber
+(
+    user_id    integer not null
+        constraint subscriber_users_user_id_fk
+            references users
+            on update cascade on delete cascade,
+    subscriber integer not null
+        constraint subscriber_users_user_id_fk_2
+            references users
+            on update cascade on delete cascade
+);
+
+alter table subscriber
+    owner to postgres;
+
