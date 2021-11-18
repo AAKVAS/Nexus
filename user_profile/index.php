@@ -98,8 +98,6 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
                 </div> 
                 </form>';
                 }
-                ?>
-                    <?php
 
                         while ($line = pg_fetch_array($getpost, null, PGSQL_ASSOC)){
                             $post_id = $line["post_id"];
@@ -128,6 +126,9 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
                                         '<div class="post_edit_button">Редактировать</div><hr>'.
                                         '<div class="delete_post_button">Удалить</div></div>
                                         </div>';
+                                }
+                                else{
+                                    echo '</div>';
                                 }
                                 echo  "<div>" . htmlentities($content) . "</div><br>";
                                 echo '<div class="post_content moved_right">';

@@ -397,7 +397,7 @@ try{
             dataType: 'html',
             data: {id: document.getElementsByTagName("body")[0].id},
             success: function (data){
-
+                alert(data);
             }
         });
     }
