@@ -268,6 +268,18 @@ a{
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
 }
+#modal_friends{
+    top: 0;
+    left: 0;
+    display: none;
+    border-radius: 0px;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
 #edit_text{
     margin-left: 380px;
     text-align: center;
@@ -279,7 +291,22 @@ a{
     border: 2px solid grey;
     padding:20px;
 }
+#friends_block{
+    margin-left: 380px;
+    text-align: center;
+    margin-top: 100px;
+    height: 280px;
+    width: 500px;
+    font-size:16px;
+    background-color: whitesmoke;
+    border: 2px solid grey;
+    padding:20px;
+}
 #cross_img{
+    height: 20px;
+    float: right;
+}
+#cross_img_friends{
     height: 20px;
     float: right;
 }
@@ -303,4 +330,20 @@ a{
 
 .moved_right{
     margin-left: 15px;
+}
+.number{
+    font-size: 28px;
+    color: darkorchid;
+}
+#friends_wrap{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: auto;
+}
+.friends_list{
+    height: 260px;
+    margin-top: 15px;
+    text-align: left;
+    font-size: 26px;
+    overflow: auto;
 }

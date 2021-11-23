@@ -34,7 +34,13 @@ if(!empty($likes)){
     }
 }
 
+$countFriends = pg_query("SELECT COUNT(*) as count FROM friend WHERE user_id='" . $id ."' OR friend_id='" . $id . "';");
+$count = pg_fetch_object($countFriends);
+
 $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE user_id='" . $id ."' AND subscriber='" . $tokenId ."';"));
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +84,19 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
 
             </div>
             <div id="friends_wrap" >
-                <div class="friend_list">тут список друзьев</div></div>
+                <div id="friend_list">Друзей:<div class="number"> <?php
+                    echo $count->count;
+                    ?>
+                    </div>
+                </div>
+                <br>
+                <div id="subscribers_list">Подписчиков:<div class="number"><?php
+                    $countSubscribers = pg_fetch_object(pg_query("SELECT COUNT(*) as count FROM subscriber WHERE user_id='" . $id ."';"));
+                    echo $countSubscribers->count;
+                    ?>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="wide_column">
             <div id="page_info_wrap" >
@@ -188,7 +206,14 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
 
     </div>
 </div>
-
+<div id="modal_friends">
+    <div id="friends_block">Друзья <?php
+        echo $count->count;
+        ?>
+        <img src="resources/cross.svg" id="cross_img_friends">
+        <div class="friends_list"></div>
+    </div>
+</div>
 <script src="../jquery-latest.js"></script>
 <script src="scripts/main.js"></script>
 </body>
