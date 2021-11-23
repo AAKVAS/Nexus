@@ -257,18 +257,16 @@ a{
     background-color: whitesmoke;
     padding:10px;
 }
-#modal{
-    top: 0;
-    left: 0;
-    display: none;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
+#edit_text{
+    background-color: #fefefe;
+    height: 260px;
+    text-align: center;
+    width: 500px;
+    margin-left: 400px;
+    margin-top: 150px;
+    padding: 20px;
 }
-#modal_friends{
+.modal{
     top: 0;
     left: 0;
     display: none;
@@ -280,17 +278,7 @@ a{
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
 }
-#edit_text{
-    margin-left: 380px;
-    text-align: center;
-    margin-top: 100px;
-    height: 280px;
-    width: 500px;
-    font-size:16px;
-    background-color: whitesmoke;
-    border: 2px solid grey;
-    padding:20px;
-}
+
 #friends_block{
     margin-left: 380px;
     text-align: center;

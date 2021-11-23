@@ -197,7 +197,7 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
         <div class="sidebar">сайдбар</div>
     </div>
 </div>
-<div id="modal">
+<div id="modal" class="modal">
     <div id="edit_text" name="">
         Редактировать текст:
         <img src="resources/cross.svg" id="cross_img">
@@ -206,12 +206,20 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
 
     </div>
 </div>
-<div id="modal_friends">
+<div id="modal_friends" class="modal">
     <div id="friends_block">Друзья <?php
         echo $count->count;
         ?>
         <img src="resources/cross.svg" id="cross_img_friends">
         <div class="friends_list"></div>
+    </div>
+</div>
+<div id="modal_subscribers" class="modal">
+    <div id="subscribers_block">Подписчики <?php
+        echo $countSubscribers->count;
+        ?>
+        <img src="resources/cross.svg" id="cross_img_subscribers">
+        <div class="subscribers_list"></div>
     </div>
 </div>
 <script src="../jquery-latest.js"></script>
