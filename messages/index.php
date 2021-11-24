@@ -44,7 +44,7 @@ else{
 <div class="page_layout">
     <div class="page_body">
         <div class="narrow_column">
-            <div class="partner_info">
+            <div id="partner_info" name="<?= $partner->user_id ?>">
                 <a class="partner_name" href="../user_profile/index.php?id=<?= $partner->user_id ?>"><?=
                     $partner->firstname . " " . $partner->lastname;
                     ?>

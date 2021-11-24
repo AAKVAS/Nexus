@@ -127,3 +127,16 @@ create table subscriber
 alter table subscriber
     owner to postgres;
 
+create table messages
+(
+    user_id integer not null
+        constraint messages_users_user_id_fk
+            references users
+            on update cascade on delete cascade,
+    text    text    not null,
+    time    time    not null
+);
+
+alter table messages
+    owner to postgres;
+
