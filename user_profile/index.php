@@ -64,7 +64,7 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
                         echo '<input id="edit_profile" class="nexus_button" type="submit" value="редактировать профиль">';
                     }
                     else{
-                        echo '<input id="send_message" class="nexus_button" type="submit" value="Сообщения"><br>';
+                        echo '<a href="../messages/index.php?id=' . $id . '"><input id="send_message" class="nexus_button" type="submit" value="Сообщения"></a><br>';
                         if(!empty($isSubscriber->user_id)){
                             echo '<input id="become_friends" class="nexus_button" type="submit" value="Отменить заявку">';
                         }
@@ -139,7 +139,7 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
                             if(!empty($user_id)){
                                 echo '<div name="' . $id . " " . $line["post_id"] .'" class="repost_block"><a href="http://localhost:9092/user_profile/index.php?id="' . $user_id . '">' . $name . '</a>';
                                 if($id==$tokenId){
-                                    echo '<img src="resources/points.svg" class="post_points" height="20">'.
+                                    echo '<img src="../resources/points.svg" class="post_points" height="20">' .
                                         '<div class="points_menu">'.
                                         '<div class="post_edit_button">Редактировать</div><hr>'.
                                         '<div class="delete_post_button">Удалить</div></div>
@@ -158,7 +158,7 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
                             echo '<a href="http://localhost:9092/user_profile/index.php?id="' . $line["user_id"] . '">' . $line["firstname"] . ' ' . $line["lastname"] .
                                 '</a>';
                             if($id==$tokenId && empty($user_id)){
-                                echo '<img src="resources/points.svg" class="post_points" height="20">'.
+                                echo '<img src="../resources/points.svg" class="post_points" height="20">' .
                                     '<div class="points_menu">'.
                                     '<div class="post_edit_button">Редактировать</div><hr>'.
                                     '<div class="delete_post_button">Удалить</div></div>';
