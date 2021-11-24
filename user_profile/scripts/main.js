@@ -421,32 +421,47 @@ friendsIdArray = [];
 
 let friendList = document.getElementById("friend_list");
 friendList.onclick = function (){
-    let friendsBlock = document.getElementById("modal_friends");
+    getSubscribersOrFriends("modal_friends", 'scripts/getFriends.php');
+}
+
+function getSubscribersOrFriends(modal, url) {
+    let friendsBlock = document.getElementById(modal);
     friendsBlock.style.display = "block";
     $.ajax({
-       url: 'scripts/getFriends.php',
-       method: 'post',
-       dataType: 'html',
-       data: {user_id: document.getElementsByTagName("body")[0].id},
-       success: function (data){
-           data = JSON.parse(data);
-           for(let i=0; i<data.length; i++){
-               if(friendsIdArray.indexOf(data[i].id) != -1){
-                   continue;
-               }
-               let div = document.createElement("a");
-               div.innerText = data[i].name;
-               div.href = "http://localhost:9092/user_profile/index.php?id=" + data[i].id;
-               friendsBlock.firstElementChild.lastElementChild.appendChild(div);
-               friendsBlock.firstElementChild.lastElementChild.appendChild(document.createElement("br"));
-               friendsIdArray.push(data[i].id);
-           }
-       }
+        url: url,
+        method: 'post',
+        dataType: 'html',
+        data: {user_id: document.getElementsByTagName("body")[0].id},
+        success: function (data){
+            data = JSON.parse(data);
+            for(let i=0; i<data.length; i++){
+                if(friendsIdArray.indexOf(data[i].id) != -1){
+                    continue;
+                }
+                let div = document.createElement("a");
+                div.innerText = data[i].name;
+                div.href = "http://localhost:9092/user_profile/index.php?id=" + data[i].id;
+                friendsBlock.firstElementChild.lastElementChild.appendChild(div);
+                friendsBlock.firstElementChild.lastElementChild.appendChild(document.createElement("br"));
+                friendsIdArray.push(data[i].id);
+            }
+        }
     });
+}
+
+let subscribersList = document.getElementById("subscribers_list");
+subscribersList.onclick = function (){
+    getSubscribersOrFriends("modal_subscribers", "scripts/getSubscribers.php");
 }
 
 let crossImg = document.getElementById("cross_img_friends");
 crossImg.onclick = function (){
     let friendsBlock = document.getElementById("modal_friends");
+    friendsBlock.style.display = "none";
+}
+
+let crossImgSub = document.getElementById("cross_img_subscribers");
+crossImgSub.onclick = function (){
+    let friendsBlock = document.getElementById("modal_subscribers");
     friendsBlock.style.display = "none";
 }

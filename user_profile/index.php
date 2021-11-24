@@ -200,26 +200,26 @@ $isSubscriber = pg_fetch_object(pg_query("SELECT user_id FROM subscriber WHERE u
 <div id="modal" class="modal">
     <div id="edit_text" name="">
         Редактировать текст:
-        <img src="resources/cross.svg" id="cross_img">
+        <img src="resources/cross.svg" id="cross_img" class="cross_img">
         <textarea id="editor"></textarea>
         <input type="submit" class="nexus_button" id="submit_edit" value="Подтвердить">
 
     </div>
 </div>
 <div id="modal_friends" class="modal">
-    <div id="friends_block">Друзья <?php
+    <div class="friends_block">Друзья <?php
         echo $count->count;
         ?>
-        <img src="resources/cross.svg" id="cross_img_friends">
+        <img src="resources/cross.svg" id="cross_img_friends" class="cross_img">
         <div class="friends_list"></div>
     </div>
 </div>
 <div id="modal_subscribers" class="modal">
-    <div id="subscribers_block">Подписчики <?php
+    <div class="friends_block">Подписчики <?php
         echo $countSubscribers->count;
         ?>
-        <img src="resources/cross.svg" id="cross_img_subscribers">
-        <div class="subscribers_list"></div>
+        <img src="resources/cross.svg" id="cross_img_subscribers" class="cross_img">
+        <div class="friends_list"></div>
     </div>
 </div>
 <script src="../jquery-latest.js"></script>
