@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nexus</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet"></head>
+</head>
+<body>
+<header class="page_header"><img class="page_header_logo logo" src="../resources/Nexus_1_3.png" ></header>
+<div class="page_layout">
+  <div class="page_body">
+    <div class="narrow_column">
+      <div id="partner_info">
+        <a class="partner_name" href="../user_profile/index.php?id=<?= $partner->user_id ?>">
+        </a>
+        <img src="../resources/points.svg" class="points">
+      </div>
+      <hr>
+      <div class="message_canvas">
+
+      </div>
+      <hr>
+      <div class="send_block">
+        <div contenteditable="true" id="message_text"></div>
+        <input type="submit" class="nexus_button" id="send_message_button" value="Отправить">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="sidebar">сайдбар</div>
+  </div>
+</div>
+<script src="../jquery-latest.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

@@ -6,6 +6,8 @@ include_once '../../src/SignatureInvalidException.php';
 include_once '../../src/JWT.php';
 include_once '../../connect.php';
 
+date_default_timezone_set('Europe/Moscow');
+
 if (!connect()) {
     echo "<H3>Соединение не установленно</H3><br>";
 }
@@ -19,7 +21,7 @@ else {
 
             if($nospaces!=""){
 
-                $newPost = pg_query("insert into messages");
+            $message = pg_query("insert into messages (user_id, text, time) VALUES ('" . $user_id ."', '" . $nospaces ."', '" . date('l jS \of F Y h:i:s A') ."')");
 
             }
         }
